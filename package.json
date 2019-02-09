@@ -1,0 +1,26 @@
+{
+  "name": "fast-image-compression",
+  "version": "1.0.0",
+  "description": "A single-pass image compression algorithm",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i-yam-jeremy/fast-image-compression.git"
+  },
+  "keywords": [
+    "compression",
+    "image"
+  ],
+  "author": "i-yam-jeremy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/i-yam-jeremy/fast-image-compression/issues"
+  },
+  "homepage": "https://github.com/i-yam-jeremy/fast-image-compression#readme",
+  "dependencies": {
+    "@thi.ng/bitstream": "^1.0.2"
+  }
+}
