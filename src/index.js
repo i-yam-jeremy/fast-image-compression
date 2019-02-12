@@ -10,45 +10,46 @@ function writeHeader(out, width, height) {
 }
 
 function writeDelta(out, oldValue, newValue) {
-  let delta = newValue - oldValue;
-  if (delta < 0) {
+  let delta = newValue - oldValue
+  let isNegative = (delta <= 0) // The "<=" is intentional, zero is counted as negative in this model
+
+  let index = Math.abs(Math.floor((delta + (isNegative ? 0 : -1)) / 2))
+  for (let i = 0; i < index; i++) {
     out.write(1, 1)
+    console.log(1)
   }
-  else {
-    out.write(0, 1)
-  }
-  deltaMagnitude = Math.abs(delta)
+  out.write(0, 1)
+  console.log(0)
 
-  let deltaBitCount = Math.ceil(Math.log2(deltaMagnitude)) + 1
-  let deltaBitCountBitCount = Math.ceil(Math.log2(deltaBitCount)) + 1
+  out.write(isNegative ? 1 : 0, 1)
+  console.log(isNegative ? 1 : 0)
 
-  for (let i = 0; i < deltaBitCountBitCount; i++) {
-    out.write(1, 1) // there are more bits
-    let bitPos = deltaBitCountBitCount - i - 1;
-    out.write((deltaBitCount >> bitPos) & 0x1, 1)
-  }
-  out.write(0, 1) // there are no more bits in bit count
-
-  for (let i = 0; i < deltaBitCount; i++) {
-    let bitPos = deltaBitCount - i - 1;
-    out.write((deltaMagnitude >> bitPos) & 0x1, 1)
-  }
+  let offset = Math.abs((delta + (isNegative ? 0 : -1)) % 2)
+  out.write(offset, 1)
+  console.log(offset)
 }
 
 function readDelta(input) {
-  let isNegative = input.read(1) == 1
-
-  let bitCount = 0
+  let index = 0
   while (input.read(1) == 1) {
-    bitCount = (bitCount << 1) | input.read(1)
+    console.log(1)
+    index++
   }
+  console.log(0)
 
-  let deltaMagnitude = 0
-  for (let i = 0; i < bitCount; i++) {
-    deltaMagnitude = (deltaMagnitude << 1) | input.read(1)
+  let isNegative = (input.read(1) == 1)
+  console.log(isNegative ? 1 : 0)
+  let offset = input.read(1)
+  console.log(offset)
+
+  let baseMagnitude = 2*index
+
+  if (isNegative) {
+    return -baseMagnitude + offset
   }
-
-  return isNegative ? -deltaMagnitude : deltaMagnitude
+  else {
+    return baseMagnitude+1 + offset
+  }
 }
 
 function writeBody(out, pixelData, width, height) {
@@ -56,8 +57,7 @@ function writeBody(out, pixelData, width, height) {
 }
 
 let out = new BitOutputStream()
-writeDelta(out, 100, 108)
+writeDelta(out, 100, 100)
 
 let input = new BitInputStream(out.bytes())
 let delta = readDelta(input)
-console.log(delta)
