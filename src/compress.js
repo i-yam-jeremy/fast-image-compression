@@ -17,8 +17,11 @@ const writeBody = body.writeBody
 const readBody = body.readBody
 
 /*
-  TODO FIXME change so it takes a Uint8Array (or bytes) as input
-  and returns another Uint8Array as a result so can be used without files
+  Compresses the given input image data using FIC (Fast Image Compression)
+
+  @param inputImageData - Uint8Array - the input image buffer
+                                        (can be bytes for JPEG, GIF, PNG, BMP, TIFF, or GIF)
+  @return - Promise(Uint8Array) - a promise for the compressed data buffer
 */
 function compress(inputImageData) {
   return new Promise((resolve, reject) => {
@@ -38,10 +41,16 @@ function compress(inputImageData) {
 }
 
 /*
-  TODO FIXME change so it takes a Uint8Array (or bytes) as input
-  and returns another Uint8Array as a result so can be used without files
+  Compresses the given input image data using FIC (Fast Image Compression)
+
+  @param inputData - Uint8Array - the image data compressed in FIC format
+  @param outputFormat - String - the output image format
+                                  (one of 'jpeg', 'png', 'bmp', 'tiff', 'gif')
+  @return - Promise(Uint8Array) - a promise for the decompressed data buffer in PNG format
 */
-function decompress(inputData) {
+function decompress(inputData, outputFormat) {
+  outputFormat = outputFormat || 'png'
+  let outputMimeType = 'image/' + outputFormat
   return new Promise((resolve, reject) => {
     let input = new BitInputStream(inputData)
     let header = readHeader(input)
@@ -52,7 +61,7 @@ function decompress(inputData) {
         return
       }
       readBody(input, edgeMap, image)
-      image.getBufferAsync('image/png')
+      image.getBufferAsync(outputMimeType)
         .then(buffer => {
           resolve(buffer)
         })
