@@ -1,11 +1,11 @@
-/*
+/**
  The 4 bytes at the start of the file, used to
  indicate that the file is a FIC (Fast Image Compression)
  file
 */
 const HEADER_MAGIC_NUMBER = 0x00464943
 
-/*
+/**
   Writes the file header with specified width and
   height to the given output bitstream
 
@@ -22,7 +22,7 @@ function writeHeader(out, width, height) {
   out.write(height, 32)
 }
 
-/*
+/**
   Reads and validates the header data from a given input bistream.
   Returns false iff the header is invalid, otherwise returns and
   object containing the image width and height

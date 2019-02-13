@@ -1,4 +1,4 @@
-/*
+/**
   Writes out a delta (difference between two values) to
   the given output bitstream in a form that uses shorter
   prefix-free codes for smaller delta values and larger
@@ -29,7 +29,7 @@ function writeDelta(out, oldValue, newValue) {
   out.write(offset, 1)
 }
 
-/*
+/**
   Reads in a delta (difference between two values) to
   the given output bitstream in a form that uses shorter
   prefix-free codes for smaller delta values and larger
