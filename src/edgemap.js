@@ -13,16 +13,11 @@
     - increases the bit position of 'out', the output bitstream
 */
 function writeEdgeMap(out, edgeMap, width, height) {
-  let trues = 0
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       out.write(edgeMap[y][x] ? 1 : 0, 1)
-      if (edgeMap[y][x]) {
-        trues++
-      }
     }
   }
-  console.log("Edge Proportion: " + (trues / (width*height)))
 }
 
 /*
