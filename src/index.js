@@ -1,7 +1,7 @@
 const bitstream = require('@thi.ng/bitstream')
 const BitInputStream = bitstream.BitInputStream
 const BitOutputStream = bitstream.BitOutputStream
-const jimp = require('jimp')
+const Jimp = require('jimp')
 const fs = require('fs')
 
 
@@ -56,9 +56,9 @@ function writeBody(out, edgeMap, image) {
       let rX = image.bitmap.data[index+0 - 4]
       let gX = image.bitmap.data[index+1 - 4]
       let bX = image.bitmap.data[index+2 - 4]
-      let rY = image.bitmap.data[index+0 - image.bitmap.width]
-      let gY = image.bitmap.data[index+1 - image.bitmap.width]
-      let bY = image.bitmap.data[index+2 - image.bitmap.width]
+      let rY = image.bitmap.data[index+0 - 4*image.bitmap.width]
+      let gY = image.bitmap.data[index+1 - 4*image.bitmap.width]
+      let bY = image.bitmap.data[index+2 - 4*image.bitmap.width]
       if (edgeMap[y][x] || (x == 0 && y == 0)) {
         // just write normal non-delta byte values for RGB
         out.write(r, 8)
@@ -122,9 +122,9 @@ function findEdges(image) {
       let rX = image.bitmap.data[index+0 - 4]
       let gX = image.bitmap.data[index+1 - 4]
       let bX = image.bitmap.data[index+2 - 4]
-      let rY = image.bitmap.data[index+0 - image.bitmap.width]
-      let gY = image.bitmap.data[index+1 - image.bitmap.width]
-      let bY = image.bitmap.data[index+2 - image.bitmap.width]
+      let rY = image.bitmap.data[index+0 - 4*image.bitmap.width]
+      let gY = image.bitmap.data[index+1 - 4*image.bitmap.width]
+      let bY = image.bitmap.data[index+2 - 4*image.bitmap.width]
       if (x == 0 && y == 0) {
         edgeMap[y].push(true)
       }
@@ -174,19 +174,47 @@ function findEdges(image) {
 }
 
 function writeEdgeMap(out, edgeMap, width, height) {
+  let trues = 0
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       out.write(edgeMap[y][x] ? 1 : 0, 1)
+      if (edgeMap[y][x]) {
+        trues++
+      }
     }
   }
+  console.log("Edge Proportion: " + (trues / (width*height)))
+}
+
+function renderEdgeMap(edgeMap, width, height, outputPath) {
+  new Jimp(width, height, (err, image) => {
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        if (edgeMap[y][x]) {
+          image.bitmap.data[4*(y*width + x) + 0] = 0xFF
+          image.bitmap.data[4*(y*width + x) + 1] = 0xFF
+          image.bitmap.data[4*(y*width + x) + 2] = 0xFF
+          image.bitmap.data[4*(y*width + x) + 3] = 0xFF
+        }
+        else {
+          image.bitmap.data[4*(y*width + x) + 0] = 0
+          image.bitmap.data[4*(y*width + x) + 1] = 0
+          image.bitmap.data[4*(y*width + x) + 2] = 0
+          image.bitmap.data[4*(y*width + x) + 3] = 0x00
+        }
+      }
+    }
+    image.write(outputPath + '-edges.png')
+  })
 }
 
 function compressImage(imagePath, outputPath) {
-  jimp.read(imagePath)
+  Jimp.read(imagePath)
     .then(image => {
       let out = new BitOutputStream()
       writeHeader(out, image.bitmap.width, image.bitmap.height)
       let edgeMap = findEdges(image)
+      renderEdgeMap(edgeMap, image.bitmap.width, image.bitmap.height, outputPath)
       writeEdgeMap(out, edgeMap, image.bitmap.width, image.bitmap.height)
       writeBody(out, edgeMap, image)
       fs.writeFile(outputPath, out.bytes(), 'binary', (err) => {
@@ -200,4 +228,4 @@ function compressImage(imagePath, outputPath) {
     })
 }
 
-compressImage('test.png', 'test.fic')
+compressImage('tree.png', 'tree.fic')
