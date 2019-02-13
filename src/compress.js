@@ -20,37 +20,45 @@ const readBody = body.readBody
   TODO FIXME change so it takes a Uint8Array (or bytes) as input
   and returns another Uint8Array as a result so can be used without files
 */
-function compress(imagePath, outputPath) {
-  Jimp.read(imagePath)
-    .then(image => {
-      let out = new BitOutputStream()
-      writeHeader(out, image.bitmap.width, image.bitmap.height)
-      let edgeMap = findEdges(image)
-      writeEdgeMap(out, edgeMap, image.bitmap.width, image.bitmap.height)
-      writeBody(out, edgeMap, image)
-      fs.writeFile(outputPath, out.bytes(), 'binary', (err) => {
-        if (err) throw err
+function compress(inputImageData) {
+  return new Promise((resolve, reject) => {
+    Jimp.read(inputImageData)
+      .then(image => {
+        let out = new BitOutputStream()
+        writeHeader(out, image.bitmap.width, image.bitmap.height)
+        let edgeMap = findEdges(image)
+        writeEdgeMap(out, edgeMap, image.bitmap.width, image.bitmap.height)
+        writeBody(out, edgeMap, image)
+        resolve(out.bytes())
       })
-    })
-    .catch(err => {
-      console.error(err)
-    })
+      .catch(err => {
+        reject(err)
+      })
+  })
 }
 
 /*
   TODO FIXME change so it takes a Uint8Array (or bytes) as input
   and returns another Uint8Array as a result so can be used without files
 */
-function decompress(inputPath, outputImagePath) {
-  fs.readFile(inputPath, (err, data) => {
-    if (err) throw err
-    let input = new BitInputStream(data)
+function decompress(inputData) {
+  return new Promise((resolve, reject) => {
+    let input = new BitInputStream(inputData)
     let header = readHeader(input)
     let edgeMap = readEdgeMap(input, header.width, header.height)
     new Jimp(header.width, header.height, (err, image) => {
-      if (err) throw err
+      if (err) {
+        reject(err)
+        return
+      }
       readBody(input, edgeMap, image)
-      image.write(outputImagePath)
+      image.getBufferAsync('image/png')
+        .then(buffer => {
+          resolve(buffer)
+        })
+        .catch(err => {
+          reject(err)
+        })
     })
   })
 }
