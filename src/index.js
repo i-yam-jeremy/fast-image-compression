@@ -4,9 +4,10 @@ const BitOutputStream = bitstream.BitOutputStream
 const Jimp = require('jimp')
 const fs = require('fs')
 
+const HEADER_MAGIC_NUMBER = 0x00464943
 
 function writeHeader(out, width, height) {
-  out.write(0x00464943, 32) // Magic Number
+  out.write(HEADER_MAGIC_NUMBER, 32)
   out.write(width, 32)
   out.write(height, 32)
 }
@@ -188,6 +189,7 @@ function writeEdgeMap(out, edgeMap, width, height) {
 
 function renderEdgeMap(edgeMap, width, height, outputPath) {
   new Jimp(width, height, (err, image) => {
+    if (err) throw err
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
         if (edgeMap[y][x]) {
@@ -218,14 +220,96 @@ function compressImage(imagePath, outputPath) {
       writeEdgeMap(out, edgeMap, image.bitmap.width, image.bitmap.height)
       writeBody(out, edgeMap, image)
       fs.writeFile(outputPath, out.bytes(), 'binary', (err) => {
-        if (err) {
-          console.error(err)
-        }
+        if (err) throw err
       })
     })
     .catch(err => {
-      console.error(err)
+      throw err
     })
 }
 
-compressImage('tree.png', 'tree.fic')
+function readHeader(input) {
+  let magicNumber = input.read(32)
+  if (magicNumber != HEADER_MAGIC_NUMBER) {
+    return null;
+  }
+  else {
+    let width = input.read(32)
+    let height = input.read(32)
+    return {
+      width: width,
+      height: height
+    }
+  }
+}
+
+function readEdgeMap(input, width, height) {
+  let edgeMap = []
+  for (let y = 0; y < height; y++) {
+    edgeMap.push([])
+    for (let x = 0; x < width; x++) {
+      let bit = input.read(1)
+      edgeMap[y].push(bit == 1)
+    }
+  }
+
+  return edgeMap
+}
+
+function readPixelData(input, edgeMap, image) {
+  for (let y = 0; y < image.bitmap.height; y++) {
+    for (let x = 0; x < image.bitmap.width; x++) {
+      let index = 4*(y*image.bitmap.width + x)
+      let rX = image.bitmap.data[index+0 - 4]
+      let gX = image.bitmap.data[index+1 - 4]
+      let bX = image.bitmap.data[index+2 - 4]
+      let rY = image.bitmap.data[index+0 - 4*image.bitmap.width]
+      let gY = image.bitmap.data[index+1 - 4*image.bitmap.width]
+      let bY = image.bitmap.data[index+2 - 4*image.bitmap.width]
+      let r=0, g=0, b=0
+      if (edgeMap[y][x] || (x == 0 && y == 0)) {
+        // just read normal non-delta byte values for RGB
+        r = input.read(8)
+        g = input.read(8)
+        b = input.read(8)
+      }
+      else {
+        let useY = (input.read(1) == 1)
+        let dR = readDelta(input)
+        let dG = readDelta(input)
+        let dB = readDelta(input)
+        if (useY) {
+          r = rY + dR
+          g = gY + dG
+          b = bY + dB
+        }
+        else {
+          r = rX + dR
+          g = gX + dG
+          b = bX + dB
+        }
+      }
+
+      image.bitmap.data[index + 0] = r
+      image.bitmap.data[index + 1] = g
+      image.bitmap.data[index + 2] = b
+      image.bitmap.data[index + 3] = 0xFF
+    }
+  }
+}
+
+function decompressImage(inputPath, outputImagePath) {
+  fs.readFile(inputPath, (err, data) => {
+    if (err) throw err
+    let input = new BitInputStream(data)
+    let header = readHeader(input)
+    let edgeMap = readEdgeMap(input, header.width, header.height)
+    new Jimp(header.width, header.height, (err, image) => {
+      if (err) throw err
+      readPixelData(input, edgeMap, image)
+      image.write(outputImagePath)
+    })
+  })
+}
+
+decompressImage('tree.fic', 'tree-output.png')
