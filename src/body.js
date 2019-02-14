@@ -57,13 +57,13 @@ function writeBody(out, edgeMap, image) {
         }
         else {
           let totalDeltaXMagnitude =
-                r - rX +
-                g - gX +
-                b - bX
+                Math.abs(r - rX) +
+                Math.abs(g - gX) +
+                Math.abs(b - bX)
           let totalDeltaYMagnitude =
-                r - rY +
-                g - gY +
-                b - bY
+                Math.abs(r - rY) +
+                Math.abs(g - gY) +
+                Math.abs(b - bY)
 
           if (totalDeltaYMagnitude < totalDeltaXMagnitude) {
             out.write(1, 1) // use Y (delta is from pixel above)
