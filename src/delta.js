@@ -4,14 +4,14 @@
   prefix-free codes for smaller delta values and larger
   codes for larger deltas
 
-  @param out - BitOutputStream - the output bitstream (destination)
-  @param oldValue - Integer - the old value (initial value)
-  @param newValue - Integer - the new value (final value)
+  <p>Note: delta = newValue - oldValue</p>
 
-  Note: delta = newValue - oldValue
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'out', the output bitstream</p>
 
-  Side Effects:
-    - increases the bit position of 'out', the output bitstream
+  @param {BitOutputStream} out the output bitstream (destination)
+  @param {Integer} oldValue the old value (initial value)
+  @param {Integer} newValue the new value (final value)
 */
 function writeDelta(out, oldValue, newValue) {
   let delta = newValue - oldValue
@@ -35,11 +35,11 @@ function writeDelta(out, oldValue, newValue) {
   prefix-free codes for smaller delta values and larger
   codes for larger deltas
 
-  @param input - BitInputStream - the input bitstream (source)
-  @return - Integer - the delta represented by the bits read
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'input', the input bitstream</p>
 
-  Side Effects:
-    - increases the bit position of 'input', the input bitstream
+  @param {BitInputStream} input the input bitstream (source)
+  @return {Integer} the delta represented by the bits read
 */
 function readDelta(input) {
   let index = 0

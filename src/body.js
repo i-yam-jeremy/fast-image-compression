@@ -13,15 +13,15 @@ const readDelta = deltaLib.readDelta
   either the pixel to the left of the pixel above to store
   the pixel data.
 
-  @param out - BitOutputStream - the output bitstream (destination)
-  @param edgeMap - Boolean[][] - a 2D-array (indexed by edgeMap[y][x])
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'out', the output bitstream</p>
+
+  @param {BitOutputStream} out the output bitstream (destination)
+  @param {Boolean[][]} edgeMap a 2D-array (indexed by edgeMap[y][x])
                                  where the value is true if the pixel
                                  at (x, y) is on an edge and false
                                  otherwise
-  @param image - Jimp - the image to compress
-
-  Side Effects:
-    - increases the bit position of 'out', the output bitstream
+  @param {Jimp} image the image to compress
 */
 function writeBody(out, edgeMap, image) {
   for (let y = 0; y < image.bitmap.height; y++) {
@@ -88,16 +88,16 @@ function writeBody(out, edgeMap, image) {
   given input bitstream using the given edgeMap, and stores
   the pixels read into the given image
 
-  @param input - BitInputStream - the input bitstream (source)
-  @param edgemap - Boolean[][] - a 2D-array representing which pixels are
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'input', the input bitstream</p>
+    <p>- overwrites pixel data in 'image' with data that was read and
+        decompressed from the input bitstream</p>
+
+  @param {BitInputStream} input the input bitstream (source)
+  @param {Boolean[][]} edgemap a 2D-array representing which pixels are
                                   on edges, if edgeMap[y][x] is true, it
                                   means the pixel at (y, x) is on an edge
-  @param image - Jimp - the destination for writing the pixel data
-
-  Side Effects:
-    - increases the bit position of 'input', the input bitstream
-    - overwrites pixel data in 'image' with data that was read and
-        decompressed from the input bitstream
+  @param {Jimp} image the destination for writing the pixel data
 */
 function readBody(input, edgeMap, image) {
   for (let y = 0; y < image.bitmap.height; y++) {

@@ -172,7 +172,7 @@
     
 
     
-    <h4 class="name" id="compress"><span class="type-signature"></span>compress<span class="signature">(inputImageData)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="compress"><span class="type-signature"></span>compress<span class="signature">(inputImageData)</span><span class="type-signature"> &rarr; {Promise(Uint8Array)}</span></h4>
     
 
     
@@ -181,6 +181,8 @@
 
 <div class="description">
     Compresses the given input image data using FIC (Fast Image Compression)
+
+  <p>Side Effects: None</p>
 </div>
 
 
@@ -221,13 +223,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Uint8Array</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Uint8Array - the input image buffer
+            <td class="description last">the input image buffer
                                         (can be bytes for JPEG, GIF, PNG, BMP, TIFF, or GIF)</td>
         </tr>
 
@@ -269,7 +276,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="compress.js.html">compress.js</a>, <a href="compress.js.html#line26">line 26</a>
+        <a href="compress.js.html">compress.js</a>, <a href="compress.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
@@ -296,10 +303,22 @@
 
         
 <div class="param-desc">
-    - Promise(Uint8Array) - a promise for the compressed data buffer
+    a promise for the compressed data buffer
 </div>
 
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise(Uint8Array)</span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -313,7 +332,7 @@
     
 
     
-    <h4 class="name" id="decompress"><span class="type-signature"></span>decompress<span class="signature">(inputData, outputFormat)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="decompress"><span class="type-signature"></span>decompress<span class="signature">(inputData, outputFormat)</span><span class="type-signature"> &rarr; {Promise(Uint8Array)}</span></h4>
     
 
     
@@ -322,6 +341,8 @@
 
 <div class="description">
     Compresses the given input image data using FIC (Fast Image Compression)
+
+  <p>Side Effects: None</p>
 </div>
 
 
@@ -362,13 +383,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Uint8Array</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Uint8Array - the image data compressed in FIC format</td>
+            <td class="description last">the image data compressed in FIC format</td>
         </tr>
 
     
@@ -380,13 +406,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">String</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">String - the output image format
+            <td class="description last">the output image format
                                   (one of 'jpeg', 'png', 'bmp', 'tiff', 'gif')</td>
         </tr>
 
@@ -428,7 +459,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="compress.js.html">compress.js</a>, <a href="compress.js.html#line51">line 51</a>
+        <a href="compress.js.html">compress.js</a>, <a href="compress.js.html#line55">line 55</a>
     </li></ul></dd>
     
 
@@ -455,10 +486,22 @@
 
         
 <div class="param-desc">
-    - Promise(Uint8Array) - a promise for the decompressed data buffer in PNG format
+    a promise for the decompressed data buffer in PNG format
 </div>
 
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise(Uint8Array)</span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -472,7 +515,7 @@
     
 
     
-    <h4 class="name" id="findEdges"><span class="type-signature"></span>findEdges<span class="signature">(image)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="findEdges"><span class="type-signature"></span>findEdges<span class="signature">(image)</span><span class="type-signature"> &rarr; {Array.&lt;Array.&lt;Boolean>>}</span></h4>
     
 
     
@@ -486,6 +529,8 @@
   edgeMap[y][x] is true iff the pixel at (x, y)
   in the given image is on an edge, and false
   otherwise
+
+  <p>Side Effects: None</p>
 </div>
 
 
@@ -526,13 +571,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Jimp</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Jimp - the input image</td>
+            <td class="description last">the input image</td>
         </tr>
 
     
@@ -573,7 +623,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edgemap.js.html">edgemap.js</a>, <a href="edgemap.js.html#line85">line 85</a>
+        <a href="edgemap.js.html">edgemap.js</a>, <a href="edgemap.js.html#line79">line 79</a>
     </li></ul></dd>
     
 
@@ -600,13 +650,22 @@
 
         
 <div class="param-desc">
-    - Boolean[][] - the 2D-array edge map
-
-  Side Effects:
-    None
+    the 2D-array edge map
 </div>
 
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;Array.&lt;Boolean>></span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -620,7 +679,7 @@
     
 
     
-    <h4 class="name" id="isLargeDelta"><span class="type-signature"></span>isLargeDelta<span class="signature">(delta)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="isLargeDelta"><span class="type-signature"></span>isLargeDelta<span class="signature">(delta)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
     
 
     
@@ -634,6 +693,8 @@
   at that point it is as good or better to just
   use the original byte value instead of the
   delta
+
+  <p>Side Effects: None</p>
 </div>
 
 
@@ -674,13 +735,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Integer</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Integer - the delta between two values</td>
+            <td class="description last">the delta between two values (must be an integer)</td>
         </tr>
 
     
@@ -721,7 +787,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edgemap.js.html">edgemap.js</a>, <a href="edgemap.js.html#line67">line 67</a>
+        <a href="edgemap.js.html">edgemap.js</a>, <a href="edgemap.js.html#line62">line 62</a>
     </li></ul></dd>
     
 
@@ -748,14 +814,23 @@
 
         
 <div class="param-desc">
-    - Boolean - true iff the given delta is large,
+    true iff the given delta is large,
                       false otherwise
-
-  Side Effects:
-    None
 </div>
 
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -780,6 +855,11 @@
     Reads the image pixel data (body of the file) from the
   given input bitstream using the given edgeMap, and stores
   the pixels read into the given image
+
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'input', the input bitstream</p>
+    <p>- overwrites pixel data in 'image' with data that was read and
+        decompressed from the input bitstream</p>
 </div>
 
 
@@ -820,13 +900,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">BitInputStream</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">BitInputStream - the input bitstream (source)</td>
+            <td class="description last">the input bitstream (source)</td>
         </tr>
 
     
@@ -838,13 +923,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Array.&lt;Array.&lt;Boolean>></span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Boolean[][] - a 2D-array representing which pixels are
+            <td class="description last">a 2D-array representing which pixels are
                                   on edges, if edgeMap[y][x] is true, it
                                   means the pixel at (y, x) is on an edge</td>
         </tr>
@@ -858,18 +948,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Jimp</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Jimp - the destination for writing the pixel data
-
-  Side Effects:
-    - increases the bit position of 'input', the input bitstream
-    - overwrites pixel data in 'image' with data that was read and
-        decompressed from the input bitstream</td>
+            <td class="description last">the destination for writing the pixel data</td>
         </tr>
 
     
@@ -944,7 +1034,7 @@
     
 
     
-    <h4 class="name" id="readDelta"><span class="type-signature"></span>readDelta<span class="signature">(input)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="readDelta"><span class="type-signature"></span>readDelta<span class="signature">(input)</span><span class="type-signature"> &rarr; {Integer}</span></h4>
     
 
     
@@ -956,6 +1046,9 @@
   the given output bitstream in a form that uses shorter
   prefix-free codes for smaller delta values and larger
   codes for larger deltas
+
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'input', the input bitstream</p>
 </div>
 
 
@@ -996,13 +1089,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">BitInputStream</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">BitInputStream - the input bitstream (source)</td>
+            <td class="description last">the input bitstream (source)</td>
         </tr>
 
     
@@ -1070,13 +1168,22 @@
 
         
 <div class="param-desc">
-    - Integer - the delta represented by the bits read
-
-  Side Effects:
-    - increases the bit position of 'input', the input bitstream
+    the delta represented by the bits read
 </div>
 
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Integer</span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -1090,7 +1197,7 @@
     
 
     
-    <h4 class="name" id="readEdgeMap"><span class="type-signature"></span>readEdgeMap<span class="signature">(input, width, height)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="readEdgeMap"><span class="type-signature"></span>readEdgeMap<span class="signature">(input, width, height)</span><span class="type-signature"> &rarr; {Array.&lt;Array.&lt;Boolean>>}</span></h4>
     
 
     
@@ -1100,6 +1207,9 @@
 <div class="description">
     Reads in an edge map (indexed by edgeMap[y][x]), with
   the specified width and height, from the given input bitstream
+
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'input', the input bitstream</p>
 </div>
 
 
@@ -1140,13 +1250,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">BitInputStream</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">BitInputStream - the input bitstream (source)</td>
+            <td class="description last">the input bitstream (source)</td>
         </tr>
 
     
@@ -1158,14 +1273,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Integer</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Unsigned Integer (32-bit) - the image width
-                                              (also, the edge map width)</td>
+            <td class="description last">the width of the image (also, width of edge map)</td>
         </tr>
 
     
@@ -1177,14 +1296,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Integer</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Unsigned Integer (32-bit) - the image height
-                                              (also, the edge map height)</td>
+            <td class="description last">the height of the image (also, height of edge map)</td>
         </tr>
 
     
@@ -1225,7 +1348,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edgemap.js.html">edgemap.js</a>, <a href="edgemap.js.html#line39">line 39</a>
+        <a href="edgemap.js.html">edgemap.js</a>, <a href="edgemap.js.html#line35">line 35</a>
     </li></ul></dd>
     
 
@@ -1252,15 +1375,24 @@
 
         
 <div class="param-desc">
-    - Boolean[][] - a 2D-array representing which pixels are
+    a 2D-array representing which pixels are
                             on edges, if edgeMap[y][x] is true, it
                             means the pixel at (y, x) is on an edge
-
-  Side Effects:
-    - increases the bit position of 'input', the input bitstream
 </div>
 
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;Array.&lt;Boolean>></span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -1274,7 +1406,7 @@
     
 
     
-    <h4 class="name" id="readHeader"><span class="type-signature"></span>readHeader<span class="signature">(input)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="readHeader"><span class="type-signature"></span>readHeader<span class="signature">(input)</span><span class="type-signature"> &rarr; {Boolean|Object}</span></h4>
     
 
     
@@ -1285,6 +1417,9 @@
     Reads and validates the header data from a given input bistream.
   Returns false iff the header is invalid, otherwise returns and
   object containing the image width and height
+
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'input', the input bitstream</p>
 </div>
 
 
@@ -1325,13 +1460,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">BitInputStream</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">BitInputStream - the input bitstream (source)</td>
+            <td class="description last">the input bitstream (source)</td>
         </tr>
 
     
@@ -1398,7 +1538,28 @@
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    {width: Integer, height: Integer} if
+                              the magic number is valid, otherwise
+                              false
+</div>
 
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+|
+
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -1428,6 +1589,9 @@
   the pixel is not on an edge, it will use the deltas from
   either the pixel to the left of the pixel above to store
   the pixel data.
+
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'out', the output bitstream</p>
 </div>
 
 
@@ -1468,13 +1632,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">BitOutputStream</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">BitOutputStream - the output bitstream (destination)</td>
+            <td class="description last">the output bitstream (destination)</td>
         </tr>
 
     
@@ -1486,13 +1655,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Array.&lt;Array.&lt;Boolean>></span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Boolean[][] - a 2D-array (indexed by edgeMap[y][x])
+            <td class="description last">a 2D-array (indexed by edgeMap[y][x])
                                  where the value is true if the pixel
                                  at (x, y) is on an edge and false
                                  otherwise</td>
@@ -1507,16 +1681,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Jimp</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Jimp - the image to compress
-
-  Side Effects:
-    - increases the bit position of 'out', the output bitstream</td>
+            <td class="description last">the image to compress</td>
         </tr>
 
     
@@ -1603,6 +1779,11 @@
   the given output bitstream in a form that uses shorter
   prefix-free codes for smaller delta values and larger
   codes for larger deltas
+
+  <p>Note: delta = newValue - oldValue</p>
+
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'out', the output bitstream</p>
 </div>
 
 
@@ -1643,13 +1824,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">BitOutputStream</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">BitOutputStream - the output bitstream (destination)</td>
+            <td class="description last">the output bitstream (destination)</td>
         </tr>
 
     
@@ -1661,13 +1847,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Integer</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Integer - the old value (initial value)</td>
+            <td class="description last">the old value (initial value)</td>
         </tr>
 
     
@@ -1679,18 +1870,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Integer</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Integer - the new value (final value)
-
-  Note: delta = newValue - oldValue
-
-  Side Effects:
-    - increases the bit position of 'out', the output bitstream</td>
+            <td class="description last">the new value (final value)</td>
         </tr>
 
     
@@ -1775,6 +1966,9 @@
 <div class="description">
     Writes the given edge map to the given
   output bitstream
+
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'out', the output bitstream</p>
 </div>
 
 
@@ -1815,13 +2009,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">BitOutputStream</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">BitOutputStream - the output bitstream</td>
+            <td class="description last">the output bitstream</td>
         </tr>
 
     
@@ -1833,13 +2032,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Array.&lt;Array.&lt;Boolean>></span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Boolean[][] - the edge map 2D-array</td>
+            <td class="description last">the edge map 2D-array</td>
         </tr>
 
     
@@ -1851,14 +2055,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Integer</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Unsigned Integer (32-bit) - the width of the image
-                                              (also, width of edge map)</td>
+            <td class="description last">the width of the image (also, width of edge map)</td>
         </tr>
 
     
@@ -1870,17 +2078,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Integer</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Unsigned Integer (32-bit) - the height of the image
-                                              (also, height of edge map)
-
-  Side Effects:
-    - increases the bit position of 'out', the output bitstream</td>
+            <td class="description last">the height of the image (also, height of edge map)</td>
         </tr>
 
     
@@ -1921,7 +2130,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="edgemap.js.html">edgemap.js</a>, <a href="edgemap.js.html#line15">line 15</a>
+        <a href="edgemap.js.html">edgemap.js</a>, <a href="edgemap.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -1955,7 +2164,7 @@
     
 
     
-    <h4 class="name" id="writeHeader"><span class="type-signature"></span>writeHeader<span class="signature">(out, width, width)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="writeHeader"><span class="type-signature"></span>writeHeader<span class="signature">(out, width, height)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1965,6 +2174,9 @@
 <div class="description">
     Writes the file header with specified width and
   height to the given output bitstream
+
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'out', the output bitstream</p>
 </div>
 
 
@@ -2005,13 +2217,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">BitOutputStream</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">BitOutputStream - the output bitstream (destination)</td>
+            <td class="description last">the output bitstream (destination)</td>
         </tr>
 
     
@@ -2023,23 +2240,33 @@
 
             <td class="type">
             
+                
+<span class="param-type">Integer</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Unsigned Integer (32-bit) - the image width</td>
+            <td class="description last">the image width (unsigned 32-bit integer)</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>width</code></td>
+                <td class="name"><code>height</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
             
             </td>
 
@@ -2047,10 +2274,7 @@
 
             
 
-            <td class="description last">Unsigned Integer (32-bit) - the image height
-
-  Side Effects:
-    - increases the bit position of 'out', the output bitstream</td>
+            <td class="description last">the image height (unsigned 32-bit integer)</td>
         </tr>
 
     
@@ -2141,7 +2365,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Feb 13 2019 15:23:55 GMT-0800 (Pacific Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Feb 13 2019 16:59:47 GMT-0800 (Pacific Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

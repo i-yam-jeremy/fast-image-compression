@@ -2,15 +2,13 @@
   Writes the given edge map to the given
   output bitstream
 
-  @param out - BitOutputStream - the output bitstream
-  @param edgeMap - Boolean[][] - the edge map 2D-array
-  @param width - Unsigned Integer (32-bit) - the width of the image
-                                              (also, width of edge map)
-  @param height - Unsigned Integer (32-bit) - the height of the image
-                                              (also, height of edge map)
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'out', the output bitstream</p>
 
-  Side Effects:
-    - increases the bit position of 'out', the output bitstream
+  @param {BitOutputStream} out the output bitstream
+  @param {Boolean[][]} edgeMap the edge map 2D-array
+  @param {Integer} width the width of the image (also, width of edge map)
+  @param {Integer} height the height of the image (also, height of edge map)
 */
 function writeEdgeMap(out, edgeMap, width, height) {
   for (let y = 0; y < height; y++) {
@@ -24,17 +22,15 @@ function writeEdgeMap(out, edgeMap, width, height) {
   Reads in an edge map (indexed by edgeMap[y][x]), with
   the specified width and height, from the given input bitstream
 
-  @param input - BitInputStream - the input bitstream (source)
-  @param width - Unsigned Integer (32-bit) - the image width
-                                              (also, the edge map width)
-  @param height - Unsigned Integer (32-bit) - the image height
-                                              (also, the edge map height)
-  @return - Boolean[][] - a 2D-array representing which pixels are
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'input', the input bitstream</p>
+
+  @param {BitInputStream} input the input bitstream (source)
+  @param {Integer} width the width of the image (also, width of edge map)
+  @param {Integer} height the height of the image (also, height of edge map)
+  @return {Boolean[][]} a 2D-array representing which pixels are
                             on edges, if edgeMap[y][x] is true, it
                             means the pixel at (y, x) is on an edge
-
-  Side Effects:
-    - increases the bit position of 'input', the input bitstream
 */
 function readEdgeMap(input, width, height) {
   let edgeMap = []
@@ -57,12 +53,11 @@ function readEdgeMap(input, width, height) {
   use the original byte value instead of the
   delta
 
-  @param delta - Integer - the delta between two values
-  @return - Boolean - true iff the given delta is large,
-                      false otherwise
+  <p>Side Effects: None</p>
 
-  Side Effects:
-    None
+  @param {Integer} delta the delta between two values (must be an integer)
+  @return {Boolean} true iff the given delta is large,
+                      false otherwise
 */
 function isLargeDelta(delta) {
   return (delta < -8 || delta > 10)
@@ -76,11 +71,10 @@ function isLargeDelta(delta) {
   in the given image is on an edge, and false
   otherwise
 
-  @param image - Jimp - the input image
-  @return - Boolean[][] - the 2D-array edge map
+  <p>Side Effects: None</p>
 
-  Side Effects:
-    None
+  @param {Jimp} image the input image
+  @return {Boolean[][]} the 2D-array edge map
 */
 function findEdges(image) {
   let edgeMap = []

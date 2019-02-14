@@ -19,9 +19,11 @@ const readBody = body.readBody
 /**
   Compresses the given input image data using FIC (Fast Image Compression)
 
-  @param inputImageData - Uint8Array - the input image buffer
+  <p>Side Effects: None</p>
+
+  @param {Uint8Array} inputImageData the input image buffer
                                         (can be bytes for JPEG, GIF, PNG, BMP, TIFF, or GIF)
-  @return - Promise(Uint8Array) - a promise for the compressed data buffer
+  @return {Promise(Uint8Array)} a promise for the compressed data buffer
 */
 function compress(inputImageData) {
   return new Promise((resolve, reject) => {
@@ -43,10 +45,12 @@ function compress(inputImageData) {
 /**
   Compresses the given input image data using FIC (Fast Image Compression)
 
-  @param inputData - Uint8Array - the image data compressed in FIC format
-  @param outputFormat - String - the output image format
+  <p>Side Effects: None</p>
+
+  @param {Uint8Array} inputData the image data compressed in FIC format
+  @param {String} outputFormat the output image format
                                   (one of 'jpeg', 'png', 'bmp', 'tiff', 'gif')
-  @return - Promise(Uint8Array) - a promise for the decompressed data buffer in PNG format
+  @return {Promise(Uint8Array)} a promise for the decompressed data buffer in PNG format
 */
 function decompress(inputData, outputFormat) {
   outputFormat = outputFormat || 'png'

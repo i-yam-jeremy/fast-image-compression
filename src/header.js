@@ -9,12 +9,12 @@ const HEADER_MAGIC_NUMBER = 0x00464943
   Writes the file header with specified width and
   height to the given output bitstream
 
-  @param out - BitOutputStream - the output bitstream (destination)
-  @param width - Unsigned Integer (32-bit) - the image width
-  @param width - Unsigned Integer (32-bit) - the image height
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'out', the output bitstream</p>
 
-  Side Effects:
-    - increases the bit position of 'out', the output bitstream
+  @param {BitOutputStream} out the output bitstream (destination)
+  @param {Integer} width the image width (unsigned 32-bit integer)
+  @param {Integer} height - the image height (unsigned 32-bit integer)
 */
 function writeHeader(out, width, height) {
   out.write(HEADER_MAGIC_NUMBER, 32)
@@ -27,13 +27,13 @@ function writeHeader(out, width, height) {
   Returns false iff the header is invalid, otherwise returns and
   object containing the image width and height
 
-  @param input - BitInputStream - the input bitstream (source)
-  @return - Boolean|Object - {width: Integer, height: Integer} if
+  <p>Side Effects:</p>
+    <p>- increases the bit position of 'input', the input bitstream</p>
+
+  @param {BitInputStream} input the input bitstream (source)
+  @return {Boolean|Object} {width: Integer, height: Integer} if
                               the magic number is valid, otherwise
                               false
-
-  Side Effects:
-    - increases the bit position of 'input', the input bitstream
 */
 function readHeader(input) {
   let magicNumber = input.read(32)
